@@ -97,7 +97,7 @@ total_rollout_steps=$(( 512 * 100 ))
 
 TRAINER_CONFIG="
     trainer.critic_warmup=0 \
-    trainer.logger=['console','wandb'] \
+    trainer.logger=['console'] \
     trainer.project_name='verl_grpo_example_geo3k' \
     trainer.experiment_name='qwen3_vl_8b_fsdp2_async' \
     trainer.test_freq=${test_freq} \
