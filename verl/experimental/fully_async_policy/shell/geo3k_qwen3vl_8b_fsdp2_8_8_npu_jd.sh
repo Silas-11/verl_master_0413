@@ -2,11 +2,9 @@ set -x
 
 # ===================================== Environment & Paths =====================================
 export CUDA_DEVICE_MAX_CONNECTIONS=1  # For megatron communication/computation overlapping
-HF_MODEL_PATH=${HF_MODEL_PATH:-"${RAY_DATA_HOME}/models/Qwen3-VL-8B-Instruct"}
-
-train_path=$HOME/data/geo3k/train.parquet
-test_path=$HOME/data/geo3k/test.parquet
-
+HF_MODEL_PATH=/mnt/chubao/lujiawei30/hw_dwq/full_async/ckpt/Qwen3-VL-8B-Instruct
+train_path=/mnt/chubao/lujiawei30/hw_dwq/full_async/data/geo3k/train.parquet
+test_path=/mnt/chubao/lujiawei30/hw_dwq/full_async/data/geo3k/test.parquet
 
 # ===================================== Rollout Mode =====================================
 rollout_mode="async"
@@ -99,7 +97,7 @@ total_rollout_steps=$(( 512 * 100 ))
 
 TRAINER_CONFIG="
     trainer.critic_warmup=0 \
-    trainer.logger=['console','wandb'] \
+    trainer.logger=['console'] \
     trainer.project_name='verl_grpo_example_geo3k' \
     trainer.experiment_name='qwen3_vl_8b_fsdp2_async' \
     trainer.test_freq=${test_freq} \
