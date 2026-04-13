@@ -55,7 +55,6 @@ python -m verl.experimental.fully_async_policy.fully_async_main \
     data.return_raw_chat=${return_raw_chat} \
     actor_rollout_ref.model.path=$HF_MODEL_PATH \
     actor_rollout_ref.actor.optim.lr=1e-6 \
-    actor_rollout_ref.actor.optim.lr_decay_steps=51200 \
     actor_rollout_ref.hybrid_engine=False \
     actor_rollout_ref.rollout.calculate_log_probs=True \
     actor_rollout_ref.actor.ppo_mini_batch_size=${train_prompt_mini_bsz} \
@@ -68,6 +67,15 @@ python -m verl.experimental.fully_async_policy.fully_async_main \
     actor_rollout_ref.rollout.tensor_model_parallel_size=1 \
     actor_rollout_ref.actor.use_dynamic_bsz=True \
     actor_rollout_ref.actor.ppo_max_token_len_per_gpu=5120 \
+    actor_rollout_ref.actor.strategy=fsdp2 \
+    actor_rollout_ref.actor.fsdp_config.reshard_after_forward=True \
+    actor_rollout_ref.ref.fsdp_config.reshard_after_forward=True \
+    actor_rollout_ref.actor.fsdp_config.entropy_checkpointing=True \
+    actor_rollout_ref.actor.fsdp_config.param_offload=False \
+    actor_rollout_ref.actor.fsdp_config.optimizer_offload=False \
+    actor_rollout_ref.actor.fsdp_config.forward_prefetch=True \
+    actor_rollout_ref.ref.fsdp_config.forward_prefetch=True \
+    actor_rollout_ref.ref.fsdp_config.param_offload=True \
     actor_rollout_ref.ref.log_prob_use_dynamic_bsz=True \
     actor_rollout_ref.ref.log_prob_max_token_len_per_gpu=5120 \
     actor_rollout_ref.rollout.log_prob_use_dynamic_bsz=True \
